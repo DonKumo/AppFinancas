@@ -1,0 +1,2 @@
+# AppFinancas
+Created with CodeSandbox
