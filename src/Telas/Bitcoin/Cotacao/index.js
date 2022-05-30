@@ -46,22 +46,20 @@ const estilos = StyleSheet.create({
         width:'100%',
         flexDirection:'row',
         justifyContent:'space-evenly',
-        backgroundColor:'#ccc',
+        backgroundColor:'#12112E',
         paddingVertical:10,
-        borderRadius:15,
     },
     botao:{
-        width:50,
-        height:30,
-        backgroundColor:'cornflowerblue',
-        borderRadius:12,
+        width:'25%',
+        height:50,
+        backgroundColor:'#312C7A',
         alignItems:'center',
         justifyContent:'center',
     },
     texto:{
         color:'white',
         fontWeight:'bold',
-        fontSize:14,
+        fontSize:16,
         
     },
 })

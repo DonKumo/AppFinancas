@@ -22,12 +22,13 @@ function url(numDias){
     const dt = new Date();
     const intervalo = numDias;
     // Construir a data final e inicial formatada pelo padrão da API
-    const final = `${dt.getFullYear()} -${ajustaValor(dt.getMonth() +1)}- ${ajustaValor(dt.getDate())}`;
+    const final = `${dt.getFullYear()}-${ajustaValor(dt.getMonth() +1)}-${ajustaValor(dt.getDate())}`;
     // Definindo a data de inicio retroagindo o intervalo
     dt.setDate(dt.getDate() - intervalo);
-    const inicial = `${dt.getFullYear()} -${ajustaValor(dt.getMonth() +1)}- ${ajustaValor(dt.getDate())}`;
+    const inicial = `${dt.getFullYear()}-${ajustaValor(dt.getMonth() +1)}-${ajustaValor(dt.getDate())}`;
     // Montar a URL de Requisição
-    const saida = `https://api.coindesk.com/v1/bpi/historical/close.json&start=${inicial}&end=${final}`
+    const saida = `https://api.coindesk.com/v1/bpi/historical/close.json?start=${inicial}&end=${final}`
+    console.log(saida)
     return saida;
 }
 
@@ -60,26 +61,39 @@ export default function Bitcoin(){
 
     const [listaMoedas, setListaMoedas] = useState([]);
     const [valGrafico, setValGrafico] = useState([0]);
-    const [numDias, setNumDias] = useState(30)
+    const [numDias, setNumDias] = useState(30);
     const [mudaData, setMudaData] = useState(true);
     const [preco, setPreco] = useState(0);
+    const [variacao, setVariacao] = useState(0);
 
-    function mudaDia(valor){
+    function mudaDia(valor){      
         setNumDias(valor)
         setMudaData(true);
     }
+    function variacaoAtual(valorAnterior, valorAtual){      
+        let valor = ( valorAtual - valorAnterior).toFixed(2)
+        setVariacao(valor)
+    }
 
-    function cotacaoAtual(){
-        setPreco(0);//TODO
+    function cotacaoAtual(valor){
+        setPreco(valor);//TODO
     }
 
     useEffect(() => {
+        
+        
+        if(mudaData){
         getListaValores(url(numDias)).then(dados => {
             setListaMoedas(dados)
+            cotacaoAtual(dados[0].valor)
+            variacaoAtual(dados[1].valor,dados[0].valor)
+     
         })
-        getValoresGrafico(url(numDias)).then(dadosG => {
+        getValoresGrafico(url(numDias)).then(dadosG => {        
             setValGrafico(dadosG)
         })
+        }
+        
         //Para não entrar em Loop Infinito
         if(mudaData)
             setMudaData(false)
@@ -88,8 +102,8 @@ export default function Bitcoin(){
     return(
         <View style={estilos.conteudo}>
             <View style={estilos.atual}>
-                <Text style={estilos.precoatual}>BTC #####.###</Text>
-                <Text style={estilos.mensagem}>Cotação Atual</Text>
+                <Text style={estilos.precoatual}>BTC {preco}</Text>
+                {variacao > 0 ?  <Text style={estilos.variacaoPositiva}>+{variacao}</Text>:  <Text style={estilos.variacaoNegativa}>{variacao}</Text> }               
             </View>
             <Grafico/>
             <Cotacao filtroDia={mudaDia} listaValores={listaMoedas}/>
@@ -99,16 +113,14 @@ export default function Bitcoin(){
 
 const estilos = StyleSheet.create({
     conteudo: {
-        backgroundColor: 'cornflowerblue',
+        backgroundColor: '#12112E',
         flex: 1,
         alignItems: 'center',
     },
     atual: {
         width: '90%',
-        height: '34%',
+        height: '20%',
         alignItems: 'center',
-        borderWidth: 1,
-        borderColor: 'white',
         justifyContent: 'center',
     },
     precoatual: {
@@ -116,8 +128,11 @@ const estilos = StyleSheet.create({
         fontWeight: 'bold',
         color: 'white'
     },
-    mensagem: {
-        fontSize: 20,
-        color: "navy",
-    },
+    variacaoPositiva:{
+      fontSize:16,
+      color:'#1AAF13'
+    },variacaoNegativa:{
+      fontSize:16,
+      color:'#DE0D0D'
+    }
 })

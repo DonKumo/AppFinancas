@@ -5,7 +5,7 @@ export default function Grafico(){
 
     return(
         <View style={estilos.conteudo}>
-            <Text>Grafico de Cotações</Text>
+       
         </View>
     );
 }
@@ -15,7 +15,9 @@ const estilos = StyleSheet.create({
         width:'90%',
         height:220,
         borderRadius:15,
-        backgroundColor:'#66c',
+        backgroundColor:'#12112E',
+        borderWidth:1,
+        borderColor:'#7A6A14',
         alignItems:'center',
         marginVertical:10,
     },

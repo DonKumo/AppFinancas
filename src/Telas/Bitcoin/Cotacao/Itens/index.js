@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet, Image,TouchableOpacity} from 'react-native';
 
 export default function Itens(props){
+  
     return(
         <View style={estilos.principal}>
             <View style={estilos.esquerda}>
@@ -22,15 +23,14 @@ export default function Itens(props){
 
  const estilos = StyleSheet.create({
      principal:{
-         width:'95%',
-         backgroundColor:'#fff',
-         marginLeft:'3%',
-         marginRight:'3%',
-         marginBottom:15,
-         borderRadius:10,
+         width:'100%',
+         backgroundColor:'#12112E',
+         borderBottomWidth: 1,
+         borderBottomColor:"#7A6A14",
          flexDirection:'row',
          alignItems:'center',
-         padding:5,
+         paddingBottom:5,
+         paddingTop:5,
 
     },
      esquerda:{
@@ -48,9 +48,10 @@ export default function Itens(props){
 
      },
      dtcotacao:{
+         marginLeft:5,
          fontSize:16,
          paddingLeft:2,
-         color:'navy',
+         color:'#7A6A14',
          fontWeight:'bold',
      },
      direita:{
@@ -60,7 +61,7 @@ export default function Itens(props){
      preco:{
          fontSize:18,
          paddingLeft:2,
-         color:'navy',
+         color:'#7A6A14',
          fontWeight:'bold',
      },
  })

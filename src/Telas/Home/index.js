@@ -24,9 +24,10 @@ export default function Home(){
                 <Text style={estilos.texto}>Clique no botão para Login</Text>
                 <TouchableOpacity 
                     style={estilos.botao}
-                    onPress ={() => navigation.navigate('Login')}/>
+                    onPress ={() => navigation.navigate('Login')}>
 
-                <Text style={estilos.txtbotao}> CONECTAR</Text>
+                  <Text style={estilos.txtbotao}>CONECTAR</Text>
+                 </TouchableOpacity>
             </Animatable.View>
         </View>
     )
@@ -35,11 +36,11 @@ export default function Home(){
 const estilos = StyleSheet.create({
     conteudo: {
         flex: 1,
-        backgroundColor: 'white'
+        backgroundColor: '#312F47'
     },
     imagem: {
         flex: 2,
-        backgroundColor: 'cornflowerblue',
+        backgroundColor: '#12112E',
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -52,19 +53,20 @@ const estilos = StyleSheet.create({
         paddingBottom: '5%',
     },
     titulo:{
-        fontSize: 10,
+        fontSize: 24,
         fontWeight: 'bold',
         marginTop: 30,
         marginBottom: 15,
-        color: 'navy'
+        color: '#7A6A14'
     },
     texto: {
+        fontSize: 16,
         color: '#a2a2a2',
     },
     botao: {
-        backgroundColor: 'cornflowerblue',
+        backgroundColor: '#12112E',
         position: 'absolute',
-        borderRadius: 40,
+        borderRadius: 15,
         width: '60%',
         alignSelf: 'center',
         paddingVertical: 10,
