@@ -28,7 +28,6 @@ function url(numDias){
     const inicial = `${dt.getFullYear()}-${ajustaValor(dt.getMonth() +1)}-${ajustaValor(dt.getDate())}`;
     // Montar a URL de Requisição
     const saida = `https://api.coindesk.com/v1/bpi/historical/close.json?start=${inicial}&end=${final}`
-    console.log(saida)
     return saida;
 }
 
@@ -52,7 +51,6 @@ async function getValoresGrafico(endereco){
     const respostaG = await fetch(endereco);
     const retornoG = await respostaG.json();
     const valoresG = retornoG.bpi;
-    
     const dadosG = Object.keys(valoresG).map(key => valoresG[key])
     return dadosG;
 }
@@ -65,6 +63,7 @@ export default function Bitcoin(){
     const [mudaData, setMudaData] = useState(true);
     const [preco, setPreco] = useState(0);
     const [variacao, setVariacao] = useState(0);
+    const [count, setCount] = useState(0);
 
     function mudaDia(valor){      
         setNumDias(valor)
@@ -81,8 +80,9 @@ export default function Bitcoin(){
 
     useEffect(() => {
         
-        
         if(mudaData){
+        setCount(count + 1)
+        console.log(count)
         getListaValores(url(numDias)).then(dados => {
             setListaMoedas(dados)
             cotacaoAtual(dados[0].valor)
@@ -105,7 +105,7 @@ export default function Bitcoin(){
                 <Text style={estilos.precoatual}>BTC {preco}</Text>
                 {variacao > 0 ?  <Text style={estilos.variacaoPositiva}>+{variacao}</Text>:  <Text style={estilos.variacaoNegativa}>{variacao}</Text> }               
             </View>
-            <Grafico/>
+            <Grafico listaValores = {valGrafico} datas = {listaMoedas}/>
             <Cotacao filtroDia={mudaDia} listaValores={listaMoedas}/>
         </View>
     );

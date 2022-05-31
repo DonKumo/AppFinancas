@@ -10,7 +10,7 @@ export default function Home(){
             <View style={estilos.imagem}>
                 <Animatable.Image
                     animation = "flipInY" 
-                    source={require('../../../assets/LogoDevRN.png')} 
+                    source={require('../../../assets/logoCesar.png')} 
                     style={{ width: '100%'}}
                     resizeMode="contain"
                 />
