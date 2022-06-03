@@ -18,15 +18,18 @@ import {
 
 
 const screenWidth = Dimensions.get("window").width;
+const screenHeight = Dimensions.get("window").height;
 const chartConfig = {
   backgroundGradientFrom: "#1E2923",
   backgroundGradientFromOpacity: 1,
   backgroundGradientTo: "#08130D",
   backgroundGradientToOpacity: 1,
   color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
-  strokeWidth: 2, // optional, default 3
-  barPercentage: 0.5,
-  useShadowColorFromDataset: false // optional
+  strokeWidth: 1, // optional, default 3
+  useShadowColorFromDataset: false, // optional
+  propsForDots: {
+    r: "0",
+  }
 };
 
 
@@ -50,15 +53,17 @@ const data = {
        <LineChart
           withDot = {false}
           data={data}
-          width={screenWidth - screenWidth/9}
-          height={220}
+          width={screenWidth}
+          height={screenHeight/3}
           chartConfig={chartConfig}
           bezier
           style={{
-            borderWidth:1,
+            borderTopWidth:1,
+            borderRightWidth:1,
+            borderLeftWidth:1,
             borderColor:'#7A6A14',
-            marginVertical: 8,
-            borderRadius: 16
+            paddingLeft:10,
+            backgroundColor: '#202925'
           }}
         />
         </View>

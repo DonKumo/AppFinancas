@@ -46,8 +46,11 @@ const estilos = StyleSheet.create({
         width:'100%',
         flexDirection:'row',
         justifyContent:'space-evenly',
-        backgroundColor:'#12112E',
-        paddingVertical:10,
+        backgroundColor:'#312C7A',
+        borderTopWidth:2,
+        borderBottomWidth:2,
+        borderColor:'#7A6A14',
+        paddingVertical:0,
     },
     botao:{
         width:'25%',
